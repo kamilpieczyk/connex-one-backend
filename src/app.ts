@@ -1,11 +1,13 @@
 import { Application } from "express";
 import promMid from "express-prometheus-middleware";
+import cors from "cors";
 
 import GET, { GETRoute } from "./routes/GET";
 import authToken from "./middlewares/auth-token";
 
 class App {
   constructor(app: Application, port: number) {
+    app.use(cors()); // allow all cors
     app.use(authToken); // 'mysecrettoken' authorisation middleware
     // use prometheus middleware
     app.use(
